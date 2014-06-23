@@ -12,12 +12,12 @@ import org.bukkit.inventory.PlayerInventory;
  * @author rdriskill
  */
 public class KraftyEventListener implements Listener
-{
+{   
    @EventHandler
-   public void onPlayerJoin(PlayerJoinEvent evt) 
-   {
-      Player player = evt.getPlayer(); // The player who joined
-      PlayerInventory inventory = player.getInventory(); // The player's inventory
+   public void onPlayerJoin(PlayerJoinEvent event) 
+   {      
+      Player player = event.getPlayer();
+      PlayerInventory inventory = player.getInventory();
       
       ItemStack potatoStack = new ItemStack(Material.BAKED_POTATO, 10);
       ItemStack woodSwordStack = new ItemStack(Material.WOOD_SWORD, 1);
@@ -26,6 +26,7 @@ public class KraftyEventListener implements Listener
       ItemStack leggingsStack = new ItemStack(Material.LEATHER_LEGGINGS, 1);
       ItemStack bootsStack = new ItemStack(Material.LEATHER_BOOTS, 1);
       
+      // TODO the below does not seem to work.
       if(inventory.contains(potatoStack))
       {
          inventory.addItem(potatoStack);
