@@ -1,3 +1,21 @@
 name: Krafty
 main: org.rts.KraftyPlugin
 version: 0.0.1-SNAPSHOT
+
+commands:
+  krafty.fireworks:
+    description: Creates fireworks.
+    usage: |
+           /<command>
+           Example: /krafty.fireworks
+  krafty.lightning:
+    description: Creates lightning.
+    usage: |
+           /<command>
+           Example: /krafty.lightning
+  krafty.spawn:
+    description: Spawns any named entity.
+    usage: |
+           /<command>
+           Example: /krafty.spawn bat
+           Example: /krafty.spawn pig_zombie

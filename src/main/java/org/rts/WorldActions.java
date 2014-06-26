@@ -65,4 +65,17 @@ public class WorldActions
    {
       world.strikeLightning(location);
    }
+   
+   /**
+    * @see <a href="http://jd.bukkit.org/rb/apidocs/org/bukkit/entity/EntityType.html">org.bukkit.entity.EntityType</a>
+    * 
+    * @param world instance of the world of the player
+    * @param location location that the entity should be spawned
+    * @param entityName name of entity to be spawned. Valid entity 
+    *    names include bat, cave_spider, chicken, cow, creeper, ghast, horse, pig_zombie, snowman, zombie
+    */
+   public static void spawnEntity(World world, Location location, String entityName)
+   {
+      world.spawn(location, EntityType.valueOf(entityName).getEntityClass());
+   }
 }

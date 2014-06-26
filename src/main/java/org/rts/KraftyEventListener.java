@@ -1,16 +1,28 @@
 package org.rts;
 
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.plugin.java.JavaPlugin;
 
 /**
  * @author rdriskill
  */
 public class KraftyEventListener implements Listener
-{   
+{
+   private final JavaPlugin plugin;
+   
+   public KraftyEventListener(JavaPlugin plugin)
+   {
+      this.plugin = plugin;
+   }
+   
+   public void register()
+   {
+      plugin.getServer().getPluginManager().registerEvents(this, plugin);
+   }
+   
    @EventHandler
    public void onPlayerJoin(PlayerJoinEvent event) 
    {
@@ -18,16 +30,5 @@ public class KraftyEventListener implements Listener
       
       PlayerActions.setInitialInventory(player);
       player.sendMessage("Welcome! Some items not owned have been added to your inventory to get you started!");
-      
-      // X = Left or Right, Y = Height, Z = Forward or Backward      
-      Location fireworksLocation = player.getLocation();
-      fireworksLocation.setZ(fireworksLocation.getZ() + 10);
-      WorldActions.createFireworks(player.getWorld(), fireworksLocation);
-      WorldActions.createFireworks(player.getWorld(), fireworksLocation);
-      WorldActions.createFireworks(player.getWorld(), fireworksLocation);
-      
-      Location lightningLocation = player.getLocation();
-      lightningLocation.setZ(lightningLocation.getZ() + 10);
-      WorldActions.createLightning(player.getWorld(), lightningLocation);
-  }
+   }
 }

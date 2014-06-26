@@ -7,17 +7,26 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public final class KraftyPlugin extends JavaPlugin
 {
+   private KraftyCommandExecutor kraftyCommandExecutor;
+   private KraftyEventListener kraftyEventListener;
+   
+   public KraftyPlugin()
+   {
+      this.kraftyCommandExecutor = new KraftyCommandExecutor(this);
+      this.kraftyEventListener = new KraftyEventListener(this);
+   }
+   
    @Override
    public void onEnable()
    {
       getLogger().info("onEnable has been invoked!");
-      getServer().getPluginManager().registerEvents(new KraftyEventListener(), this);
+      kraftyEventListener.register();
+      kraftyCommandExecutor.register();
    }
    
    @Override
    public void onDisable()
    {
       getLogger().info("onDisable has been invoked!");
-      
    }
 }
