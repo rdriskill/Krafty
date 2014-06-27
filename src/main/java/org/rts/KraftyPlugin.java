@@ -19,14 +19,7 @@ public final class KraftyPlugin extends JavaPlugin
    @Override
    public void onEnable()
    {
-      getLogger().info("onEnable has been invoked!");
       kraftyEventListener.register();
       kraftyCommandExecutor.register();
-   }
-   
-   @Override
-   public void onDisable()
-   {
-      getLogger().info("onDisable has been invoked!");
    }
 }

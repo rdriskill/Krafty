@@ -29,6 +29,6 @@ public class KraftyEventListener implements Listener
       Player player = event.getPlayer();
       
       PlayerActions.setInitialInventory(player);
-      player.sendMessage("Welcome! Some items not owned have been added to your inventory to get you started!");
+      player.sendMessage("Welcome! Some un-owned items may have been added to your inventory to get you started. For server info, visit http://tinyurl.com/ouhdsw2");
    }
 }
