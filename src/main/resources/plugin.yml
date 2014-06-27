@@ -19,3 +19,13 @@ commands:
            /<command>
            Example: /krafty.spawn bat
            Example: /krafty.spawn pig_zombie
+  krafty.killEntity:
+    description: Kills all of the specified entities in the world.
+    usage: |
+           /<command>
+           Example: /krafty.killEntity bat
+  krafty.enchantInventory:
+    description: Enchants all items in inventory with all enchantments to the max level possible.
+    usage: |
+           /<command>
+           Example: /krafty.enchantInventory
