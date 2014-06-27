@@ -1,6 +1,7 @@
 package org.rts;
 
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -43,6 +44,20 @@ public class PlayerActions
       if(!inventory.contains(Material.LEATHER_BOOTS))
       {
          inventory.addItem(new ItemStack(Material.LEATHER_BOOTS, 1));
+      }
+   }
+   
+   public static void enchantInventory(Player player)
+   {
+      ItemStack[] itemStack = player.getInventory().getContents();
+      Enchantment[] enchantments = Enchantment.values();
+      
+      for(ItemStack item: itemStack)
+      {
+         for(Enchantment enchantment: enchantments)
+         {
+            item.addEnchantment(enchantment, enchantment.getMaxLevel());
+         }
       }
    }
 }

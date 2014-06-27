@@ -7,6 +7,8 @@ import org.bukkit.FireworkEffect;
 import org.bukkit.FireworkEffect.Type;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.entity.Damageable;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
 import org.bukkit.inventory.meta.FireworkMeta;
@@ -77,5 +79,18 @@ public class WorldActions
    public static void spawnEntity(World world, Location location, String entityName)
    {
       world.spawn(location, EntityType.valueOf(entityName).getEntityClass());
+   }
+   
+   public static void killEntity(World world, String entityName)
+   {
+      Class<? extends Entity> entityClass = EntityType.valueOf(entityName).getEntityClass();
+      
+      for (Entity entity : world.getEntities())
+      {
+         if (entity.getClass().equals(entityClass) && entity instanceof Damageable)
+         {
+            ((Damageable)entity).damage(1000000000);
+         }
+      }
    }
 }
