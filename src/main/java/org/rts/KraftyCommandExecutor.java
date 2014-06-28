@@ -18,10 +18,9 @@ public class KraftyCommandExecutor implements CommandExecutor
    public static final String FIREWORKS = PLUGIN_COMMAND_PREFIX + COMMAND_SEPARATOR + "fireworks";
    public static final String LIGHTNING = PLUGIN_COMMAND_PREFIX + COMMAND_SEPARATOR + "lightning";
    public static final String SPAWN = PLUGIN_COMMAND_PREFIX + COMMAND_SEPARATOR + "spawn";
-   
-   // TODO Untested commands added
    public static final String KILL_ENTITY = PLUGIN_COMMAND_PREFIX + COMMAND_SEPARATOR + "killEntity";
    public static final String ENCHANT_INVENTORY = PLUGIN_COMMAND_PREFIX + COMMAND_SEPARATOR + "enchantInventory";
+   public static final String NUKE = PLUGIN_COMMAND_PREFIX + COMMAND_SEPARATOR + "nuke";
    
    public KraftyCommandExecutor(JavaPlugin plugin)
    {
@@ -35,6 +34,7 @@ public class KraftyCommandExecutor implements CommandExecutor
       plugin.getCommand(SPAWN).setExecutor(this);
       plugin.getCommand(KILL_ENTITY).setExecutor(this);
       plugin.getCommand(ENCHANT_INVENTORY).setExecutor(this);
+      plugin.getCommand(NUKE).setExecutor(this);
    }
    
    /**
@@ -70,6 +70,11 @@ public class KraftyCommandExecutor implements CommandExecutor
       if(cmd.getName().equalsIgnoreCase(ENCHANT_INVENTORY))
       { 
          return this.handleEnchantInventoryCmd(sender, cmd, commandLabel, args);
+      }
+      
+      if(cmd.getName().equalsIgnoreCase(NUKE))
+      { 
+         return this.handleNukeCmd(sender, cmd, commandLabel, args);
       }
       
       return false; 
@@ -175,6 +180,29 @@ public class KraftyCommandExecutor implements CommandExecutor
       if(sender instanceof Player)
       {
          PlayerActions.enchantInventory((Player) sender);
+      }
+      
+      else 
+      {
+         sender.sendMessage("This command can only be run by a player.");
+      }
+      
+      return Boolean.TRUE;
+   }
+   
+   public Boolean handleNukeCmd(CommandSender sender, Command cmd, String commandLabel, String[] args)
+   {
+      if(args.length < 1)
+      {
+         sender.sendMessage("Command needs an arguement!");
+         return Boolean.FALSE;
+      } 
+      
+      if(sender instanceof Player)
+      {
+         Player player = (Player) sender;
+         String nukePlayerName = args[0].trim();
+         PlayerActions.createNuke(player.getWorld(), player, nukePlayerName);
       }
       
       else 

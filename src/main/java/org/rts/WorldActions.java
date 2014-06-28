@@ -83,13 +83,18 @@ public class WorldActions
    
    public static void killEntity(World world, String entityName)
    {
-      Class<? extends Entity> entityClass = EntityType.valueOf(entityName).getEntityClass();
+      EntityType entityType = EntityType.valueOf(entityName);
       
       for (Entity entity : world.getEntities())
       {
-         if (entity.getClass().equals(entityClass) && entity instanceof Damageable)
+         if(entity.getType().equals(entityType))
          {
-            ((Damageable)entity).damage(1000000000);
+            try
+            {
+               ((Damageable)entity).damage(1000000000);
+            }
+            
+            catch(Exception ex) {} //Ignore
          }
       }
    }
