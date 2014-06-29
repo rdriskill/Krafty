@@ -16,7 +16,7 @@ import org.bukkit.inventory.PlayerInventory;
  */
 public class PlayerActions
 {
-   // TODO Ideas = { "Make invincible" }
+
    public static void setInitialInventory(Player player)
    {
       PlayerInventory inventory = player.getInventory();
@@ -94,46 +94,30 @@ public class PlayerActions
       }
       
       if(playerLocation != null)
-      {
-         // 20 block wide
-         // 20 block height
-         // X = Left or Right, Y = Height, Z = Forward or Backward
-         playerLocation.setY(playerLocation.getY() + 5);
-         tnt = world.spawn(playerLocation, TNTPrimed.class);
-         ((TNTPrimed)tnt).setFuseTicks(fuseTicks);
+      {         
+         double origX = playerLocation.getX();
+         double origY = playerLocation.getY();
+         double origZ = playerLocation.getZ();
          
-         playerLocation.setX(playerLocation.getX() + 1);
-         tnt = world.spawn(playerLocation, TNTPrimed.class);
-         ((TNTPrimed)tnt).setFuseTicks(fuseTicks);
-         
-         playerLocation.setX(playerLocation.getX() + 1);
-         tnt = world.spawn(playerLocation, TNTPrimed.class);
-         ((TNTPrimed)tnt).setFuseTicks(fuseTicks);
-         
-         playerLocation.setX(playerLocation.getX() - 3);
-         tnt = world.spawn(playerLocation, TNTPrimed.class);
-         ((TNTPrimed)tnt).setFuseTicks(fuseTicks);
-         
-         playerLocation.setX(playerLocation.getX() - 1);
-         tnt = world.spawn(playerLocation, TNTPrimed.class);
-         ((TNTPrimed)tnt).setFuseTicks(fuseTicks);
-         
-         playerLocation.setZ(playerLocation.getZ() + 1);
-         tnt = world.spawn(playerLocation, TNTPrimed.class);
-         ((TNTPrimed)tnt).setFuseTicks(fuseTicks);
-         
-         playerLocation.setZ(playerLocation.getZ() + 1);
-         tnt = world.spawn(playerLocation, TNTPrimed.class);
-         ((TNTPrimed)tnt).setFuseTicks(fuseTicks);
-         
-         playerLocation.setZ(playerLocation.getZ() - 3);
-         tnt = world.spawn(playerLocation, TNTPrimed.class);
-         ((TNTPrimed)tnt).setFuseTicks(fuseTicks);
-         
-         playerLocation.setZ(playerLocation.getZ() - 1);
-         tnt = world.spawn(playerLocation, TNTPrimed.class);
-         ((TNTPrimed)tnt).setFuseTicks(fuseTicks);
-         
+         // Height Loop
+         for(double yIndex = origY + 5; yIndex <= origY + 10; yIndex += 2)
+         {
+            // Forward/Backward Loop
+            for(double zIndex = origZ - 1; zIndex <= origZ + 1; zIndex += 1)
+            {
+               playerLocation.setZ(zIndex);
+               tnt = world.spawn(playerLocation, TNTPrimed.class);
+               ((TNTPrimed)tnt).setFuseTicks(fuseTicks);
+
+               // Left/Right Loop
+               for(double xIndex = origX - 1; xIndex <= origX + 1; xIndex += 1)
+               {
+                  playerLocation.setX(xIndex);
+                  tnt = world.spawn(playerLocation, TNTPrimed.class);
+                  ((TNTPrimed)tnt).setFuseTicks(fuseTicks);
+               }
+            }
+         }         
       }
       
       else player.sendMessage("Player could not be found.");
