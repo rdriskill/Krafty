@@ -2,6 +2,7 @@ package org.rts;
 
 import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -79,49 +80,53 @@ public class PlayerActions
    
    public static void createNuke(World world, Player player, String nukePlayerName)
    {
-      List<Player> players = world.getPlayers();
-      Location playerLocation = null;
+      List<Player> worldPlayers = world.getPlayers();
+      Player nukedPlayer = null;
+      Location nukedPlayerLocation = null;
       TNTPrimed tnt = null;
       int fuseTicks = 13;
       
-      for(Player worldPlayer: players)
+      for(Player worldPlayer: worldPlayers)
       {
          if(worldPlayer.getDisplayName().equals(nukePlayerName))
          {
-            playerLocation = player.getLocation();
+            nukedPlayer = worldPlayer;
+            nukedPlayerLocation = nukedPlayer.getLocation();
             break;
          }
       }
       
-      if(playerLocation != null)
+      if(nukedPlayerLocation != null)
       {         
-         double origX = playerLocation.getX();
-         double origY = playerLocation.getY();
-         double origZ = playerLocation.getZ();
+         double origX = nukedPlayerLocation.getX();
+         double origY = nukedPlayerLocation.getY();
+         double origZ = nukedPlayerLocation.getZ();
          
          // Height Loop
          for(double yIndex = origY + 5; yIndex <= origY + 10; yIndex += 2)
          {
-            playerLocation.setY(yIndex);
-            tnt = world.spawn(playerLocation, TNTPrimed.class);
+            nukedPlayerLocation.setY(yIndex);
+            tnt = world.spawn(nukedPlayerLocation, TNTPrimed.class);
             ((TNTPrimed)tnt).setFuseTicks(fuseTicks);
             
             // Forward/Backward Loop
             for(double zIndex = origZ - 1; zIndex <= origZ + 1; zIndex += 1)
             {
-               playerLocation.setZ(zIndex);
-               tnt = world.spawn(playerLocation, TNTPrimed.class);
+               nukedPlayerLocation.setZ(zIndex);
+               tnt = world.spawn(nukedPlayerLocation, TNTPrimed.class);
                ((TNTPrimed)tnt).setFuseTicks(fuseTicks);
 
                // Left/Right Loop
                for(double xIndex = origX - 1; xIndex <= origX + 1; xIndex += 1)
                {
-                  playerLocation.setX(xIndex);
-                  tnt = world.spawn(playerLocation, TNTPrimed.class);
+                  nukedPlayerLocation.setX(xIndex);
+                  tnt = world.spawn(nukedPlayerLocation, TNTPrimed.class);
                   ((TNTPrimed)tnt).setFuseTicks(fuseTicks);
                }
             }
-         }                
+         }
+         
+         Bukkit.broadcastMessage(nukedPlayer.getDisplayName() + " was nuked by " + player.getDisplayName() + ".");
       }
       
       else player.sendMessage("Player could not be found.");
