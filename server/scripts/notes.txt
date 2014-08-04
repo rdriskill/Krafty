@@ -1,0 +1,4 @@
+Get to Bukkit Console
+==================================
+enter screen: screen -r bukkit
+exit screen:  (ctrl) + a + d

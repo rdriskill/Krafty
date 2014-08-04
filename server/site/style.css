@@ -1,0 +1,37 @@
+body
+{
+   font-size: 16px;
+   font-family: Helvetica, Arial, Verdana, sans-serif;
+   color: #ffffff;
+   background: url(craft-bg.jpg);
+}
+
+div.main-heading
+{
+   font-size: 28px;
+   background: url(transparent-bg.png) repeat;
+   width:80%;
+   min-height:50px;
+   padding:10px;
+   margin-bottom: 10px;
+}
+
+div.content
+{
+   background: url(transparent-bg.png) repeat;
+   width:80%;
+   min-height:200px;
+   padding:10px;
+   margin-bottom: 10px;
+}
+
+div.content div.heading
+{
+   font-size: 28px;
+   border-bottom: 1pt solid #989899;
+}
+
+a
+{
+   color: #68af39
+}
